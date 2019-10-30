@@ -4,7 +4,7 @@
 
 A simple docker container that runs PostGIS
 
-Visit our page on the docker hub at: https://registry.hub.docker.com/u/kartoza/postgis/
+Visit our page on the docker hub at: https://registry.hub.docker.com/u/drasey/postgis/
 
 There are a number of other docker postgis containers out there. This one
 differentiates itself by:
@@ -26,11 +26,11 @@ you should configure the host for it in the provided 71-apt-cacher-ng file.
 
 The following convention is used for tagging the images we build:
 
-kartoza/postgis:[postgres_version]-[postgis-version]
+drasey/postgis:[postgres_version]-[postgis-version]
 
 So for example:
 
-``kartoza/postgis:9.5-2.2`` Provides PostgreSQL 9.5, PostGIS 2.2
+``drasey/postgis:9.5-2.2`` Provides PostgreSQL 9.5, PostGIS 2.2
 
 **Note:** We highly recommend that you use tagged versions because
 successive minor versions of PostgreSQL write their database clusters
@@ -48,14 +48,14 @@ get our docker trusted build like this:
 
 
 ```
-docker pull kartoza/postgis
+docker pull drasey/postgis
 ```
 
 To build the image yourself without apt-cacher (also consumes more bandwidth
 since deb packages need to be refetched each time you build) do:
 
 ```
-docker build -t kartoza/postgis git://github.com/kartoza/docker-postgis
+docker build -t drasey/postgis git://github.com/drasey/docker-postgis
 ```
 
 To build with apt-cache (and minimised download requirements) do you need to
@@ -64,13 +64,13 @@ match your cacher host. Then build using a local url instead of directly from
 github.
 
 ```
-git clone git://github.com/kartoza/docker-postgis
+git clone git://github.com/drasey/docker-postgis
 ```
 
 Now edit ``71-apt-cacher-ng`` then do:
 
 ```
-docker build -t kartoza/postgis .
+docker build -t drasey/postgis .
 ```
 
 ## Run
@@ -79,7 +79,7 @@ docker build -t kartoza/postgis .
 To create a running container do:
 
 ```
-sudo docker run --name "postgis" -p 25432:5432 -d -t kartoza/postgis
+sudo docker run --name "postgis" -p 25432:5432 -d -t drasey/postgis
 ```
 
 ## Environment variables
@@ -153,7 +153,7 @@ Docker volumes can be used to persist your data.
 
 ```
 mkdir -p ~/postgres_data
-docker run -d -v $HOME/postgres_data:/var/lib/postgresql kartoza/postgis`
+docker run -d -v $HOME/postgres_data:/var/lib/postgresql drasey/postgis`
 ```
 
 You need to ensure the ``postgres_data`` directory has sufficient permissions
