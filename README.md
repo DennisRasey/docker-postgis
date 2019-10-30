@@ -4,7 +4,7 @@
 
 A simple docker container that runs PostGIS
 
-Visit our page on the docker hub at: https://hub.docker.com/r/kartoza/postgis/
+Visit our page on the docker hub at: https://hub.docker.com/r/drasey/postgis/
 
 There are a number of other docker postgis containers out there. This one
 differentiates itself by:
@@ -31,11 +31,11 @@ just getting started with docker, PostGIS and QGIS, we really recommend that you
 
 The following convention is used for tagging the images we build:
 
-kartoza/postgis:[postgres_version]-[postgis-version]
+drasey/postgis:[postgres_version]-[postgis-version]
 
 So for example:
 
-``kartoza/postgis:9.6-2.4`` Provides PostgreSQL 9.6, PostGIS 2.4
+``drasey/postgis:9.6-2.4`` Provides PostgreSQL 9.6, PostGIS 2.4
 
 **Note:** We highly recommend that you use tagged versions because
 successive minor versions of PostgreSQL write their database clusters
@@ -53,14 +53,14 @@ get our docker trusted build like this:
 
 
 ```
-docker pull kartoza/postgis
+docker pull drasey/postgis
 ```
 
 To build the image yourself without apt-cacher (also consumes more bandwidth
 since deb packages need to be refetched each time you build) do:
 
 ```
-docker build -t kartoza/postgis git://github.com/kartoza/docker-postgis
+docker build -t drasey/postgis git://github.com/DennisRasey/docker-postgis
 ```
 
 To build with apt-cacher (and minimise download requirements) you need to
@@ -69,13 +69,13 @@ match your cacher host. Then build using a local url instead of directly from
 github.
 
 ```
-git clone git://github.com/kartoza/docker-postgis
+git clone git://github.com/DennisRasey/docker-postgis
 ```
 
 Now edit ``71-apt-cacher-ng`` then do:
 
 ```
-docker build -t kartoza/postgis .
+docker build -t drasey/postgis .
 ```
 
 ## Run
@@ -84,7 +84,7 @@ docker build -t kartoza/postgis .
 To create a running container do:
 
 ```
-sudo docker run --name "postgis" -p 25432:5432 -d -t kartoza/postgis
+sudo docker run --name "postgis" -p 25432:5432 -d -t drasey/postgis
 ```
 
 ## Environment variables
@@ -139,7 +139,7 @@ You can also define any other configuration to add to `postgres.conf`, separated
 
 For convenience we have provided a ``docker-compose.yml`` that will run a
 copy of the database image and also our related database backup image (see 
-[https://github.com/kartoza/docker-pg-backup](https://github.com/kartoza/docker-pg-backup)).
+[https://github.com/DennisRasey/docker-pg-backup](https://github.com/DennisRasey/docker-pg-backup)).
 
 The docker compose recipe will expose PostgreSQL on port 25432 (to prevent
 potential conflicts with any local database instance you may have).
@@ -187,7 +187,7 @@ Currently you can pass `.sql` and `.sql.gz` files as mounted volumes.
 
 ```
 
-docker run -d -v ./setup-db.sql:/docker-entrypoint-initdb.d/setup-db.sql kartoza/postgis`
+docker run -d -v ./setup-db.sql:/docker-entrypoint-initdb.d/setup-db.sql drasey/postgis`
 ```
 
 
@@ -198,7 +198,7 @@ Docker volumes can be used to persist your data.
 
 ```
 mkdir -p ~/postgres_data
-docker run -d -v $HOME/postgres_data:/var/lib/postgresql kartoza/postgis`
+docker run -d -v $HOME/postgres_data:/var/lib/postgresql drasey/postgis`
 ```
 
 You need to ensure the ``postgres_data`` directory has sufficient permissions
@@ -348,7 +348,7 @@ sure clients connect with verify-ca or verify-full sslmode).
 The following is an example Dockerfile that sets up a container with custom ssl private key and certificate:
 
 ```
-FROM kartoza/postgis:11.0-2.5
+FROM drasey/postgis:11.0-2.5
 
 ADD ssl_cert.pem /etc/ssl/certs/ssl_cert.pem
 ADD localhost_ssl_key.pem /etc/ssl/private/ssl_key.pem
@@ -397,3 +397,7 @@ Gavin Fleming (gavin@kartoza.com)
 Risky Maulana (rizky@kartoza.com)
 Admire Nyakudya (admire@kartoza.com)
 December 2018
+
+Dennis Rasey (drasey@babbee.org)
+October 2019
+
