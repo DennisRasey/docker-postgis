@@ -165,3 +165,7 @@ for the docker process to read / write it.
 
 Tim Sutton (tim@kartoza.com)
 May 2014
+
+Dennis Rasey (drasey@babbee.org)
+October 2019
+
