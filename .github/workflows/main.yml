@@ -3,11 +3,11 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-
+  container-job:
     runs-on: ubuntu-latest
+
     container:
-    image:  node:10.16-jessie
+       image:  node:10.16-jessie
 
     services:
       postgres:
