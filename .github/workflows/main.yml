@@ -3,12 +3,24 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-
+  container-job:
     runs-on: ubuntu-latest
 
+    container:
+       image:  node:10.16-jessie
+
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
+
     steps:
-    - uses: actions/checkout
+    - uses: actions/checkout@9.5-2.2
     - name: Run a one-line script
       run: echo Hello, world!
     - name: Run a multi-line script
