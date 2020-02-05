@@ -20,7 +20,7 @@ jobs:
         - 5432:5432
 
     steps:
-    - uses: actions/checkout@9.5-2.2
+    - uses: actions/checkout
     - name: Run a one-line script
       run: echo Hello, world!
     - name: Run a multi-line script
